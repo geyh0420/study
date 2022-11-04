@@ -26,16 +26,18 @@ function download_dir() {
     then
       mkdir "$name_" && cd "$name_"
       download_dir "$baseurl_" "$url_" "$name_"
-      cd -
+      cd ..
     else
       download_file "$baseurl_" "$url_" "$name_"
     fi
   done < $TMP_FILE
 }
 
-
 baseurl=http://lingxi.live/
-url=123
-name=123
-mkdir "$name" && cd "$name"
-download_dir "$baseurl" "$url" "$name"
+while read -r url
+do
+  read -r name
+  mkdir "$name" && cd "$name"
+  download_dir "$baseurl" "$url" "$name"
+  cd ..
+done
