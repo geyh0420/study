@@ -1,6 +1,9 @@
 #!/bin/bash
 TMP_FILE=tmp.txt
 
+# url decode
+# winpty python -c 'import urllib.parse, sys; print(urllib.parse.unquote(sys.argv[1]))' <url>
+
 function download_file() {
   local baseurl=$1
   local url=$2
