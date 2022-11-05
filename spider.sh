@@ -21,7 +21,7 @@ function download_dir() {
   local name_=
 
   curl -s "$baseurl_" > index.html
-  cat index.html | grep href | grep -v '\.\.' | sed -e 's;<a href=";;' -e 's;</a>.*;;' -e 's;">;\n;' > $TMP_FILE
+  cat index.html | grep href | grep -v '\.\.\/' | sed -e 's;<a href=";;' -e 's;</a>.*;;' -e 's;">;\n;' > $TMP_FILE
   while read -r url_
   do
     read -r name_
