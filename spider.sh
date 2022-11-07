@@ -30,7 +30,8 @@ function download_dir() {
       mkdir "$name_" && cd "$name_"
       download_dir "$baseurl_" "$url_" "$name_"
       cd ..
-    else
+    elif [[ "$url_" =~ .*\.html$ ]]
+    then
       download_file "$baseurl_" "$url_" "$name_"
     fi
   done < $TMP_FILE
