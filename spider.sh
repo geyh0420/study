@@ -27,12 +27,13 @@ function download_dir() {
     read -r name_
     if [[ "$url_" =~ .*\/$ ]]
     then
-      mkdir "$name_" && cd "$name_"
+      [[ ! -e "$name_" ]] && mkdir "$name_"
+      cd "$name_"
       download_dir "$baseurl_" "$url_" "$name_"
       cd ..
     elif [[ "$url_" =~ .*\.html$ ]]
     then
-      download_file "$baseurl_" "$url_" "$name_"
+      [[ ! -e "$name_" ]] && download_file "$baseurl_" "$url_" "$name_"
     fi
   done < $TMP_FILE
 }
@@ -41,7 +42,8 @@ baseurl=http://lingxi.live/
 while read -r url
 do
   read -r name
-  mkdir "$name" && cd "$name"
+  [[ ! -e "$name" ]] && mkdir "$name"
+  cd "$name"
   download_dir "$baseurl" "$url" "$name"
   cd ..
 done
